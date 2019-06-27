@@ -1,12 +1,21 @@
 // Donut
+Plotly.d3.csv('data/df2017.csv', function(err, rows){
+
+function unpack(rows, key) {
+    return rows.map(function(row) { 
+      return row[key]; 
+    });
+  }
+
 var data = [{
-  values: [16, 15, 12, 6, 5, 4, 42],
-  labels: ['US', 'China', 'European Union', 'Russian Federation', 'Brazil', 'India', 'Rest of World' ],
+  type: 'pie',
+  values: unpack(rows, 'sex'),
+  labels: ['M', 'F', 'U'],
   domain: {column: 0},
-  name: 'GHG Emissions',
-  hoverinfo: 'label+percent+name',
+  name: 'Vaccine Counts by Gender',
+  hoverinfo: 'label+percent',
   hole: .4,
-  type: 'pie'
+  
 },{
   values: [27, 11, 25, 8, 1, 3, 25],
   labels: ['US', 'China', 'European Union', 'Russian Federation', 'Brazil', 'India', 'Rest of World' ],
@@ -47,5 +56,5 @@ var layout = {
 
 Plotly.newPlot('myDonut', data, layout, {showSendToCloud:true});
 
-
+});
 
