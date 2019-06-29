@@ -1,26 +1,35 @@
 // Donut
+Plotly.d3.csv('data/df2017_Alex.csv', function(err, rows){
+
+function unpack(rows, key) {
+    return rows.map(function(row) { 
+      return row[key]; 
+    });
+  }
+
 var data = [{
-  values: [13028, 21445, 959],
+  type: 'pie',
+  values: unpack(rows, 'sex'),
   labels: ['M', 'F', 'U'],
   domain: {column: 0},
-  name: '2017',
-  hoverinfo: 'label+percent+name',
+  name: 'Vaccine Counts by Gender',
+  hoverinfo: 'label+percent',
   hole: .4,
-  type: 'pie'
+  
 },{
-  values: [14392, 26257, 383],
-  labels: ['M', 'F', 'U'],
-  text: '2018',
+  values: [27, 11, 25, 8, 1, 3, 25],
+  labels: ['US', 'China', 'European Union', 'Russian Federation', 'Brazil', 'India', 'Rest of World' ],
+  text: 'CO2',
   textposition: 'inside',
   domain: {column: 1},
-  name: '2018',
+  name: 'CO2 Emissions',
   hoverinfo: 'label+percent+name',
   hole: .4,
   type: 'pie'
 }];
 
 var layout = {
-  title: 'Total Vaccines by Gender',
+  title: 'Age Sex',
   grid: {rows: 1, columns: 2},
   showlegend: false,
   annotations: [
@@ -29,7 +38,7 @@ var layout = {
         size: 14
       },
       showarrow: false,
-      text: '2017',
+      text: 'GHG',
       x: 0.22,
       y: 0.5
     },
@@ -38,7 +47,7 @@ var layout = {
         size: 14
       },
       showarrow: false,
-      text: '2018',
+      text: 'CO2',
       x: 0.78,
       y: 0.5
     }
@@ -47,4 +56,5 @@ var layout = {
 
 Plotly.newPlot('myDonut', data, layout, {showSendToCloud:true});
 
+});
 
